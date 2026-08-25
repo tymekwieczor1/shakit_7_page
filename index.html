@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shakti7 Essence — ritual incense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#EAE4D8;
+    --parchment-2:#F4F0E7;
+    --charcoal:#211E1A;
+    --smoke:#5C564B;
+    --clay:#A9825E;
+    --line: rgba(33,30,26,0.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--parchment-2);
+    color:var(--charcoal);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--clay); color:var(--parchment-2);}
+
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:0.05; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{color:inherit; text-decoration:none;}
+  .eyebrow{
+    font-size:11px; letter-spacing:0.28em; text-transform:uppercase;
+    color:var(--smoke);
+  }
+  h1,h2,h3{
+    font-family:'Cormorant Garamond', serif; font-weight:400;
+    letter-spacing:0.01em;
+  }
+  .italic{font-style:italic; font-weight:400;}
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 6vw;
+    background:var(--parchment-2);
+    border-bottom:1px solid var(--line);
+    color:var(--charcoal);
+  }
+  .logo{
+    font-family:'Cormorant Garamond', serif; font-size:17px;
+    letter-spacing:0.18em; font-weight:400;
+  }
+  .navlinks{display:flex; gap:36px; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;}
+  .navlinks a{opacity:0.75; transition:opacity .3s;}
+  .navlinks a:hover{opacity:1;}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    height:100vh; min-height:640px;
+    display:flex; align-items:flex-end;
+    overflow:hidden;
+    background:#000;
+  }
+  .hero img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    object-position:60% 30%;
+    filter:sepia(0.18) contrast(1.05) brightness(0.86);
+    transform:scale(1.03);
+  }
+  .hero::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(10,9,7,0.15) 0%, rgba(10,9,7,0.1) 45%, rgba(10,9,7,0.78) 100%);
+  }
+  .hero-content{
+    position:relative; z-index:2;
+    padding:0 6vw 8vw;
+    color:var(--parchment-2);
+    max-width:760px;
+  }
+  .hero .eyebrow{color:#D8CDBB; margin-bottom:18px;}
+  .hero h1{
+    font-size:clamp(42px, 7vw, 96px);
+    line-height:0.98;
+    font-weight:300;
+  }
+  .hero h1 em{font-style:italic; font-weight:400; color:#E4D3B8;}
+  .hero p{
+    margin-top:22px; max-width:480px; font-size:15px; line-height:1.75; color:#DCD5C6;
+    font-weight:300;
+  }
+
+  /* PIONOWY SCROLL CUE */
+  .scroll-cue{
+    position:absolute; bottom:40px; right:6vw; z-index:3;
+    color:#DCD5C6; font-size:10px; letter-spacing:0.24em; text-transform:uppercase;
+    display:flex; flex-direction:column; align-items:center; gap:12px;
+    opacity:0.85;
+  }
+  .scroll-cue span{
+    writing-mode:vertical-rl;
+  }
+  .scroll-cue::after{
+    content:''; width:1px; height:40px; background:rgba(220,213,198,0.5);
+    animation:drop 2.4s ease-in-out infinite;
+  }
+  @keyframes drop{
+    0%{transform:scaleY(0); transform-origin:top;}
+    50%{transform:scaleY(1); transform-origin:top;}
+    50.01%{transform-origin:bottom;}
+    100%{transform:scaleY(0); transform-origin:bottom;}
+  }
+
+  section{padding:140px 6vw;}
+  .intro{
+    max-width:640px; margin:0 auto; text-align:center;
+    padding-top:120px; padding-bottom:100px;
+  }
+  .intro .eyebrow{justify-content:center; display:block; margin-bottom:22px;}
+  .intro h2{font-size:clamp(26px,3.4vw,38px); line-height:1.35; font-weight:300;}
+  .intro h2 em{color:var(--clay);}
+
+  /* PHILOSOPHY STRIP */
+  .plate{
+    display:grid; grid-template-columns:1fr; justify-items:center;
+    text-align:center; gap:0; padding:100px 6vw 140px;
+  }
+  .plate figure{
+    width:min(720px, 92vw);
+  }
+  .plate img{
+    width:100%; display:block; aspect-ratio:3/2.4; object-fit:cover;
+    filter:sepia(0.15) contrast(1.04) brightness(0.94);
+    background:#000;
+  }
+  .plate figcaption{
+    margin-top:16px;
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    font-size:17px; color:var(--charcoal);
+    letter-spacing:0.01em;
+  }
+
+  /* PRODUCTS */
+  .products-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:60px; flex-wrap:wrap; gap:20px;
+    border-bottom:1px solid var(--line); padding-bottom:28px;
+  }
+  .products-head h2{font-size:clamp(30px,4vw,46px); font-weight:300;}
+  .products-head p{max-width:340px; font-size:13px; line-height:1.7; color:var(--smoke);}
+
+  .products{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .product{
+    background:var(--parchment-2);
+    padding:36px 28px 40px;
+    display:flex; flex-direction:column; gap:14px;
+    position:relative;
+    transition:background .4s ease;
+  }
+  .product:hover{background:var(--parchment);}
+  
+  /* GALERIA PRODUKTU */
+  .product-gallery{
+    position:relative;
+    width:100%;
+    margin-bottom:6px;
+  }
+  .product-slides{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    border-radius:1px;
+  }
+  .product-slides::-webkit-scrollbar{
+    display:none;
+  }
+  .product-slide{
+    flex:0 0 100%;
+    aspect-ratio:4/5;
+    overflow:hidden;
+    background:#000;
+    scroll-snap-align:start;
+  }
+  .product-slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:sepia(0.15) contrast(1.04) brightness(0.92);
+    transition:transform 0.6s ease, filter 0.6s ease;
+  }
+  .product:hover .product-slide img{
+    filter:sepia(0.08) contrast(1.02) brightness(0.98);
+  }
+
+  /* STRZAŁKI NA LAPTOPIE */
+  .gallery-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:rgba(33, 30, 26, 0.45);
+    backdrop-filter:blur(4px);
+    border:none;
+    color:var(--parchment-2);
+    font-size:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    opacity:0;
+    transition:all 0.3s ease;
+    z-index:3;
+    padding:0;
+  }
+  .gallery-nav.prev{left:10px;}
+  .gallery-nav.next{right:10px;}
+  .product-gallery:hover .gallery-nav{
+    opacity:0.85;
+  }
+  .gallery-nav:hover{
+    opacity:1 !important;
+    background:rgba(33, 30, 26, 0.8);
+    transform:translateY(-50%) scale(1.08);
+  }
+
+  /* KROPKI */
+  .gallery-dots{
+    position:absolute;
+    bottom:12px;
+    left:0;
+    right:0;
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    z-index:2;
+    pointer-events:auto;
+  }
+  .gallery-dot{
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:rgba(234, 228, 216, 0.45);
+    transition:all 0.3s ease;
+    cursor:pointer;
+  }
+  .gallery-dot.active{
+    background:var(--parchment-2);
+    transform:scale(1.25);
+  }
+
+  .product .num{font-size:11px; letter-spacing:0.16em; color:var(--clay);}
+  .product h3{font-size:26px; font-weight:400;}
+  .product .desc{font-size:13px; line-height:1.7; color:var(--smoke); flex-grow:1;}
+  .product .meta{
+    display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid var(--line); padding-top:16px; margin-top:6px;
+  }
+  .product .price{font-family:'Cormorant Garamond', serif; font-size:20px;}
+  .product .add{
+    font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    border:1px solid var(--charcoal); padding:9px 16px;
+    transition:all .3s ease;
+  }
+  .product .add:hover{background:var(--charcoal); color:var(--parchment-2);}
+
+  /* RITUAL / CTA band */
+  .ritual{
+    position:relative; min-height:78vh;
+    display:flex; align-items:center;
+    overflow:hidden; background:#000;
+  }
+  .ritual img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    filter:sepia(0.2) contrast(1.05) brightness(0.65);
+  }
+  .ritual::after{content:'';position:absolute; inset:0; background:rgba(10,9,7,0.35);}
+  .ritual-content{
+    position:relative; z-index:2; color:var(--parchment-2);
+    max-width:560px; margin:0 auto; text-align:center; padding:0 6vw;
+  }
+  .ritual h2{font-size:clamp(30px,4.2vw,52px); font-weight:300; line-height:1.25;}
+  .ritual h2 em{color:#E4D3B8;}
+  .ritual .cta{
+    display:inline-block; margin-top:36px;
+    font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+    border-bottom:1px solid #E4D3B8; padding-bottom:6px; color:#E4D3B8;
+  }
+
+  /* FOOTER */
+  footer{
+    padding:90px 6vw 40px;
+    display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;
+    border-top:1px solid var(--line);
+  }
+  footer .logo{font-size:16px; letter-spacing:0.16em; color:var(--charcoal); margin-bottom:16px; display:block;}
+  footer p{font-size:13px; line-height:1.7; color:var(--smoke); max-width:280px;}
+  footer h4{font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--smoke); margin-bottom:16px; font-weight:400;}
+  footer ul{list-style:none;}
+  footer li{margin-bottom:10px; font-size:14px;}
+  footer li a:hover{color:var(--clay);}
+  .foot-bottom{
+    grid-column:1/-1; margin-top:60px; padding-top:24px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; font-size:11px; letter-spacing:0.08em; color:var(--smoke);
+    flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width:860px){
+    .navlinks{display:none;}
+    section{padding:90px 6vw;}
+    .plate{padding:70px 6vw 70px;}
+    .plate figure{width:100%;}
+    .products{grid-template-columns:1fr;}
+    footer{grid-template-columns:1fr; gap:36px;}
+    
+    .hero-content{
+      padding:0 16vw 12vw 6vw;
+    }
+    .scroll-cue{
+      bottom:28px;
+      right:4vw;
+      font-size:9px;
+      gap:8px;
+    }
+    .scroll-cue::after{
+      height:28px;
+    }
+    .gallery-nav{
+      display:none; /* na telefonie ukrywamy strzałki, zostaje czysty swipe */
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<nav>
+  <span class="logo">SHAKTI7 ESSENCE</span>
+  <div class="navlinks">
+    <a href="#collection">Collection</a>
+    <a href="#philosophy">Philosophy</a>
+    <a href="#ritual">Ritual</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <img src="assets/kwiat_1.JPG" alt="Kwiat">
+  <div class="hero-content">
+    <span class="eyebrow">Ritual Incense</span>
+    <h1>Smoke that<br><em>leads you inward.</em></h1>
+    <p>Hand-rolled incense made from resins, woods and herbs, crafted in small batches. For those who light it not to make a room smell good — but to stop for a moment.</p>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+  </div>
+</header>
+
+<section class="intro" id="philosophy">
+  <span class="eyebrow">Philosophy</span>
+  <h2>We believe scent is the shortest path to stillness. <em>The magic cannot leave you — because it is you.</em></h2>
+</section>
+
+<div class="plate">
+  <figure>
+    <img src="assets/wazka.jpeg" alt="Ważka na dłoni">
+    <figcaption>&ldquo;What is meant for you will find you.&rdquo;</figcaption>
+  </figure>
+</div>
+
+<section id="collection">
+  <div class="products-head">
+    <h2>Collection</h2>
+    <p>Three scent compositions, each built around a single intention.</p>
+  </div>
+  <div class="products">
+    <!-- PRODUKT 01 -->
+    <div class="product">
+      <div class="product-gallery">
+        <button class="gallery-nav prev" aria-label="Poprzednie zdjęcie">✕</button>
+        <div class="product-slides">
+          <div class="product-slide"><img src="assets/kadzidlo1.jpeg" alt="New Beginning 1"></div>
+          <div class="product-slide"><img src="assets/kadzidlo2.jpeg" alt="New Beginning 2"></div>
+          <div class="product-slide"><img src="assets/kadzidlo3.jpeg" alt="New Beginning 3"></div>
+        </div>
+        <button class="gallery-nav next" aria-label="Następne zdjęcie">✕</button>
+        <div class="gallery-dots">
+          <span class="gallery-dot active"></span>
+          <span class="gallery-dot"></span>
+          <span class="gallery-dot"></span>
+        </div>
+      </div>
+      <span class="num">01</span>
+      <h3>New Beginning</h3>
+      <p class="desc">Palo santo, lemon and white cedar. For the start of anything.</p>
+      <div class="meta"><span class="price">$11</span><a class="add" href="#">Add</a></div>
+    </div>
+
+    <!-- PRODUKT 02 -->
+    <div class="product">
+      <div class="product-gallery">
+        <button class="gallery-nav prev" aria-label="Poprzednie zdjęcie">✕</button>
+        <div class="product-slides">
+          <div class="product-slide"><img src="assets/kadzidlo2.jpeg" alt="True Heart 1"></div>
+          <div class="product-slide"><img src="assets/kadzidlo1.jpeg" alt="True Heart 2"></div>
+          <div class="product-slide"><img src="assets/kadzidlo3.jpeg" alt="True Heart 3"></div>
+        </div>
+        <button class="gallery-nav next" aria-label="Następne zdjęcie">✕</button>
+        <div class="gallery-dots">
+          <span class="gallery-dot active"></span>
+          <span class="gallery-dot"></span>
+          <span class="gallery-dot"></span>
+        </div>
+      </div>
+      <span class="num">02</span>
+      <h3>True Heart</h3>
+      <p class="desc">Rose, sandalwood and a trace of vanilla. For decisions made slowly.</p>
+      <div class="meta"><span class="price">$12</span><a class="add" href="#">Add</a></div>
+    </div>
+
+    <!-- PRODUKT 03 -->
+    <div class="product">
+      <div class="product-gallery">
+        <button class="gallery-nav prev" aria-label="Poprzednie zdjęcie">✕</button>
+        <div class="product-slides">
+          <div class="product-slide"><img src="assets/kadzidlo3.jpeg" alt="Quiet Mind 1"></div>
+          <div class="product-slide"><img src="assets/kadzidlo2.jpeg" alt="Quiet Mind 2"></div>
+          <div class="product-slide"><img src="assets/kadzidlo1.jpeg" alt="Quiet Mind 3"></div>
+        </div>
+        <button class="gallery-nav next" aria-label="Następne zdjęcie">✕</button>
+        <div class="gallery-dots">
+          <span class="gallery-dot active"></span>
+          <span class="gallery-dot"></span>
+          <span class="gallery-dot"></span>
+        </div>
+      </div>
+      <span class="num">03</span>
+      <h3>Quiet Mind</h3>
+      <p class="desc">Sage, lavender and benzoin resin. For meditation and screen-free evenings.</p>
+      <div class="meta"><span class="price">$11</span><a class="add" href="#">Add</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="ritual" id="ritual">
+  <img src="assets/ksiezyc.jpeg" alt="Miękkie, rozświetlone zdjęcie w tonacji sepii">
+  <div class="ritual-content">
+    <h2>Quiet the mind, and the soul <em>will speak.</em></h2>
+    <a class="cta" href="#collection">View the collection →</a>
+  </div>
+</section>
+
+<footer id="contact">
+  <div>
+    <span class="logo">SHAKTI7 ESSENCE</span>
+    <p>Handmade incense designed in Warsaw. We ship across Europe and beyond.</p>
+  </div>
+  <div>
+    <h4>Shop</h4>
+    <ul>
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#">Gift Sets</a></li>
+      <li><a href="#">Accessories</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Contact</h4>
+    <ul>
+      <li><a href="mailto:hello@shakti7essence.com">hello@shakti7essence.com</a></li>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Warsaw, Poland</a></li>
+    </ul>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Shakti7 Essence. All rights reserved.</span>
+    <span>Terms · Privacy</span>
+  </div>
+</footer>
+
+<script>
+  // Obsługa galerii: kropki + strzałki
+  document.querySelectorAll('.product-gallery').forEach(gallery => {
+    const slidesContainer = gallery.querySelector('.product-slides');
+    const dots = gallery.querySelectorAll('.gallery-dot');
+    const prevBtn = gallery.querySelector('.gallery-nav.prev');
+    const nextBtn = gallery.querySelector('.gallery-nav.next');
+
+    // Ikony strzałek SVG wstawiane dynamicznie
+    if (prevBtn) prevBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>';
+    if (nextBtn) nextBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>';
+
+    // Synchronizacja aktywnej kropki ze scrollem
+    slidesContainer.addEventListener('scroll', () => {
+      const scrollPos = slidesContainer.scrollLeft;
+      const slideWidth = slidesContainer.clientWidth;
+      const activeIndex = Math.round(scrollPos / slideWidth);
+
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === activeIndex);
+      });
+    });
+
+    // Przełączanie kropkami
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        const slideWidth = slidesContainer.clientWidth;
+        slidesContainer.scrollTo({
+          left: slideWidth * idx,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Obsługa strzałki w lewo
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const slideWidth = slidesContainer.clientWidth;
+        slidesContainer.scrollBy({
+          left: -slideWidth,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // Obsługa strzałki w prawo
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const slideWidth = slidesContainer.clientWidth;
+        slidesContainer.scrollBy({
+          left: slideWidth,
+          behavior: 'smooth'
+        });
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
